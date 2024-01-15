@@ -1,0 +1,13 @@
+body {
+    background-color: #e0e0e0;
+}
+.footer-dark {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 20px 0;
+}
+
+.footer-dark img {
+    height: 30px;
+    margin-right: 10px;
+}

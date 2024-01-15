@@ -1,0 +1,43 @@
+<!-- user_profile.html -->
+
+{% extends "base.html" %} {% block title %}User Profile{% endblock title %}
+{%block content %} {% load tz %}
+<div class="container">
+  <h2 class="my-4">Your Borrowed Books</h2>
+  {% if user_borrowed_books %}
+  <ul>
+    <table class="table mt-5 text-center">
+      <thead>
+        <tr>
+          <th scope="col">Book Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Borrowed Time</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for borrow in user_borrowed_books %}
+        <tr>
+          <td class="align-middle">{{ borrow.book.title }}</td>
+          <td class="align-middle">{{ borrow.book.price }}</td>
+          <td class="align-middle">{{ borrow.borrowed_time}}</td>
+          <td class="align-middle">
+            {% if borrow.returned %}
+            <a class="btn btn-danger w-100 disabled" href="">Return</a>
+            {% else %}
+            <a class="btn btn-danger w-100" href="{% url 'return' borrow.id %}">
+              Return
+            </a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </ul>
+
+  {% else %}
+  <p>You haven't borrowed any books yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

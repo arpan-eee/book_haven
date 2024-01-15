@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block title %} All Books List {% endblock title %}
+{% block content %}
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-3">
+      <h3 class="text-center mb-3">Book Categories</h3>
+      <div class="list-group">
+        <a
+          href="{% url 'book_list' %}"
+          class="list-group-item list-group-item-action text-center"
+        >
+          All Categories
+        </a>
+        {% for category in category_list %}
+        <a
+          href="{% url 'book_list_by_category' category.slug %}"
+          class="list-group-item list-group-item-action text-center"
+        >
+          {{ category.name }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        {% for book in books %}
+        <div class="col-sm-6 col-lg-3 col-md-4">
+          <div class="card m-2 h-100">
+            <div class="card-body d-flex align-items-center">
+              <div class="mx-auto">
+                <img
+                  src="{{ book.image.url }}"
+                  class="card-img-top"
+                  alt="{{ book.title }}"
+                />
+                <h4 class="card-title pt-2 text-center">
+                  <a href="" class="text-decoration-none text-dark">
+                    {{ book.title }}
+                  </a>
+                </h4>
+
+                <p class="text-center"><b>Price : {{ book.price }}$</b></p>
+                <div class="text-center">
+                  <a
+                    class="btn btn-primary text-white text-center"
+                    href="{% url 'book_detail' book.id %}"
+                  >
+                    See Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
